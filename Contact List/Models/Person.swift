@@ -20,19 +20,19 @@ struct Person {
     
     static func getPerson() -> [Person] {
         let dataManager = DataManager()
-        dataManager.email.shuffle()
-        dataManager.phoneNumber.shuffle()
-        dataManager.name.shuffle()
-        dataManager.surName.shuffle()
+        let email = dataManager.email.shuffled()
+        let phoneNumber = dataManager.phoneNumber.shuffled()
+        let name = dataManager.name.shuffled()
+        let surname = dataManager.surName.shuffled()
         
         var persons = [Person]()
         
-        for index in 0 ..< dataManager.name.count {
+        for index in 0 ..< name.count {
             let person = Person(
-                name: dataManager.name[index],
-                surName: dataManager.surName[index],
-                email: dataManager.email[index],
-                phoneNumber: dataManager.phoneNumber[index]
+                name: name[index],
+                surName: surname[index],
+                email: email[index],
+                phoneNumber: phoneNumber[index]
             )
             persons.append(person)
         }

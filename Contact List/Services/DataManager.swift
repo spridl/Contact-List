@@ -6,7 +6,7 @@
 //
 
 class DataManager {
-    var name = [
+    let name = [
         "John",
         "Sharon",
         "Aaron",
@@ -18,7 +18,7 @@ class DataManager {
         "Allan",
         "Tim"
     ]
-    var surName = [
+    let surName = [
         "Murphy",
         "Jankin",
         "Williams",
@@ -30,7 +30,7 @@ class DataManager {
         "Pennyworth",
         "Dow"
     ]
-    var email = [
+    let email = [
         "one@mail.ru",
         "two@mail.ru",
         "three@mail.ru",
@@ -42,7 +42,7 @@ class DataManager {
         "nine@mail.ru",
         "ten@mail.ru"
     ]
-    var phoneNumber = [
+    let phoneNumber = [
         "123456",
         "654321",
         "121212",
