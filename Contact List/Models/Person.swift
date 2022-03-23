@@ -5,7 +5,7 @@
 //  Created by Тимур on 21.03.2022.
 //
 
-import Foundation
+import UIKit
 
 struct Person {
     
@@ -18,12 +18,24 @@ struct Person {
         "\(name) \(surName)"
     }
     
-    static func getPerson(for index: Int, in data: DataManager) -> Person {
-        Person(
-            name: data.name[index],
-            surName: data.surName[index],
-            email: data.email[index],
-            phoneNumber: data.phoneNumber[index]
-        )
+    static func getPerson() -> [Person] {
+        let dataManager = DataManager()
+        dataManager.email.shuffle()
+        dataManager.phoneNumber.shuffle()
+        dataManager.name.shuffle()
+        dataManager.surName.shuffle()
+        
+        var persons = [Person]()
+        
+        for index in 0 ..< dataManager.name.count {
+            let person = Person(
+                name: dataManager.name[index],
+                surName: dataManager.surName[index],
+                email: dataManager.email[index],
+                phoneNumber: dataManager.phoneNumber[index]
+            )
+            persons.append(person)
+        }
+        return persons
     }
 }

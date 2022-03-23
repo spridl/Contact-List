@@ -9,46 +9,51 @@ import UIKit
 
 class SectionContactsTableViewController: UITableViewController {
     
-    var dataManager: DataManager!
+    var persons: [Person]!
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return dataManager.name.count
+        persons.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        2
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let person = Person.getPerson(for: indexPath.section, in: dataManager)
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "phoneCell", for: indexPath)
-            var content = cell.defaultContentConfiguration()
-            
-            content.text = person.phoneNumber
-            content.image = UIImage(systemName: "phone")
-            cell.contentConfiguration = content
-            
-            return cell
+            return setCell(
+                withIdentifier: "phoneCell",
+                for: indexPath, withImage: "phone",
+                of: persons[indexPath.section].phoneNumber
+            )
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "emailCell", for: indexPath)
-            var content = cell.defaultContentConfiguration()
-            
-            content.text = person.email
-            content.image = UIImage(systemName: "tray")
-            cell.contentConfiguration = content
-            
-            return cell
+            return setCell(
+                withIdentifier: "emailCell",
+                for: indexPath,
+                withImage: "tray",
+                of: persons[indexPath.section].email
+            )
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let person = Person.getPerson(for: section, in: dataManager)
-        return person.fullName
+        let person = persons[section].fullName
+        return person
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    private func setCell(withIdentifier identifier: String, for indexPath: IndexPath, withImage imageName: String, of person: String) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        
+        content.text = person
+        content.image = UIImage(systemName: imageName)
+        cell.contentConfiguration = content
+        
+        return cell
     }
 }

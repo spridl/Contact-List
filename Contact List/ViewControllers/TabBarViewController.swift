@@ -9,13 +9,15 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
+    let persons = Person.getPerson()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sendData()
     }
     
     private func sendData() {
-        let shuffledData = shuffleDataManager()
+        let persons = persons
         
         guard let tabbar = viewControllers else { return }
         
@@ -23,21 +25,10 @@ class TabBarViewController: UITabBarController {
             
             guard let navigationVC = viewController as? UINavigationController else { return }
             if let contactTableVC = navigationVC.topViewController as? ContactTableViewController {
-                contactTableVC.dataManager = shuffledData
+                contactTableVC.persons = persons
             } else if let sectionContactsTVC = navigationVC.topViewController as? SectionContactsTableViewController {
-                sectionContactsTVC.dataManager = shuffledData
+                sectionContactsTVC.persons = persons
             }
         }
-    }
-    
-    private func shuffleDataManager() -> DataManager {
-        let dataManager = DataManager()
-        
-        dataManager.email.shuffle()
-        dataManager.name.shuffle()
-        dataManager.phoneNumber.shuffle()
-        dataManager.surName.shuffle()
-        
-        return dataManager
     }
 }
